@@ -1,30 +1,30 @@
-const path = require('path');
-const webpack = require('webpack');
-const isProduction = process.env.NODE_ENV === 'production'; // 是否是生产环境
-const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启gzip压缩， 按需引用
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const path = require('path')
+const webpack = require('webpack')
+const isProduction = process.env.NODE_ENV === 'production' // 是否是生产环境
+const CompressionWebpackPlugin = require('compression-webpack-plugin') // 开启gzip压缩， 按需引用
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 /**
  * 代码压缩工具
  *
  * @dependency terser-webpack-plugin
  */
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 
-const port = 9001;
+const port = 9111
 
 /**
  * 普通代理模式
  */
 const devProxy = {
   '/api': {
-    target: 'http://localhost:3000', // 代理的 API 地址
+    target: 'http://localhost:8080', // 代理的 API 地址
     changeOrigin: true, // 将主机标头的原点更改为目标URL
     secure: false,
     pathRewrite: {
       '^/api': ''
     }
   }
-};
+}
 
 function getExternals() {
   return {
@@ -38,7 +38,7 @@ function getExternals() {
     axios: 'axios',
     // eslint-disable-next-line prettier/prettier
     nprogress: 'NProgress'
-  };
+  }
 }
 
 module.exports = {
@@ -148,4 +148,4 @@ module.exports = {
   },
 
   runtimeCompiler: true
-};
+}
